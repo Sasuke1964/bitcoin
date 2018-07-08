@@ -3,6 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <stdlib.h>
+
 #include <chainparams.h>
 #include <consensus/merkle.h>
 
@@ -121,8 +123,8 @@ public:
 
         genesis = CreateGenesisBlock(1231006505, 2083236893, 0x1d00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("000000004435fd97f17e674e5ef0e42874a82082d1d5447a6e5a5bf5733c8aef")); //uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
-        assert(genesis.hashMerkleRoot == uint256S("f9e5ed2ac2a439021c9a66e2feb13161ea219e49f563a00a601da833f2806183")); // uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
+        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
@@ -229,10 +231,27 @@ public:
         nDefaultPort = 18333;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1530932086, 1356817004, 1231006505, 1, 50 * COIN); // (1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+        // genesis = CreateGenesisBlock(1530932086, 1356817004, 1231006505, 1, 50 * COIN);
+        // char tmpStr[67];
+        // sprintf( tmpStr, "%u\n", genesis.GetHash());
+        // printf("hash is: %s\n", tmpStr);
+        // printf("prehash is: %u\n", genesis.GetHash());
+        // printf("posthash is: %u\n", uint256S("3923399568"));
+        // printf("--------------------\n");
+        // printf("assertion:\n");
+        // printf("%x\n", consensus.hashGenesisBlock);
+        // printf("%x\n", uint256S("0x000000004435fd97f17e674e5ef0e42874a82082d1d5447a6e5a5bf5733c8aef"));
+        // printf("--------------------\n");
+        // consensus.hashGenesisBlock = genesis.GetHash();
+        // printf("%s\n", consensus.hashGenesisBlock.ToString().c_str());
+        // printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
+        // assert(consensus.hashGenesisBlock == uint256S("0x000000004435fd97f17e674e5ef0e42874a82082d1d5447a6e5a5bf5733c8aef"));
+        // assert(genesis.hashMerkleRoot == uint256S("0xf9e5ed2ac2a439021c9a66e2feb13161ea219e49f563a00a601da833f2806183")); // byteswapped: litte -> big endian 836180f233a81d600aa063f5499e21ea6131b1fee2669a1c0239a4c22aede5f9
+
+        genesis = CreateGenesisBlock(1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000000004435fd97f17e674e5ef0e42874a82082d1d5447a6e5a5bf5733c8aef"));
-        assert(genesis.hashMerkleRoot == uint256S("0xf9e5ed2ac2a439021c9a66e2feb13161ea219e49f563a00a601da833f2806183"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
+        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -322,6 +341,11 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206"));
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+
+        // genesis = CreateGenesisBlock(1530932086, 1356817004, 1231006505, 1, 50 * COIN); // (1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+        // consensus.hashGenesisBlock = genesis.GetHash();
+        // assert(consensus.hashGenesisBlock == uint256S("0x000000004435fd97f17e674e5ef0e42874a82082d1d5447a6e5a5bf5733c8aef"));
+        // assert(genesis.hashMerkleRoot == uint256S("0xf9e5ed2ac2a439021c9a66e2feb13161ea219e49f563a00a601da833f2806183"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
